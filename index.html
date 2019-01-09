@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>SVG</title>
+
+  <style>
+    /* Make the chart container fill the page using CSS. */
+
+    #chart {
+      position: fixed;
+      left: 0px;
+      right: 0px;
+      top: 0px;
+      bottom: 0px;
+    }
+
+    .d3-tip {
+      line-height: 1;
+      padding: 6px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    /* Creates a small triangle extender for the tooltip */
+
+    .d3-tip:after {
+      box-sizing: border-box;
+      display: inline;
+      font-size: 10px;
+      width: 100%;
+      line-height: 1;
+      color: rgba(0, 0, 0, 0.8);
+      content: "\25BC";
+      position: absolute;
+      text-align: center;
+    }
+
+    /* Style northward tooltips specifically */
+
+    .d3-tip.n:after {
+      margin: -2px 0 0 0;
+      top: 100%;
+      left: 0;
+    }
+  </style>
+</head>
+
+<body>  
+  <script src="d3.min.js" charset="utf-8"></script>
+  <script src="d3-tip.js" charset="utf-8"></script>
+  <script>
+    // Extract the width and height that was computed by CSS.    
+
+    //Margin conventions
+    var margin = { top: 20, right: 60, bottom: 20, left: 20 };
+    var padding = { top: 60, right: 60, bottom: 60, left: 60 };
+    var width = 900 - margin.left - margin.right - padding.left - padding.right;
+    var height = 560 - margin.top - margin.bottom - padding.top - padding.right;
+
+    var tool_tip = d3.tip()
+      .attr("class", "d3-tip")
+      .offset([-8, 0])
+      .html(function (d) { return "Shape1"; });
+
+    var svg = d3.select("body").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    // load the external svg from a file
+    d3.xml("shape1.svg").mimeType("image/svg+xml").get(function (error, xml) {
+      if (error) throw error;
+      
+      var importedNode = document.importNode(xml.documentElement, true);
+      console.log(xml.documentElement);
+      console.log(xml.documentElement.getElementsByTagName("g"));
+      svg
+        .each(function () {
+          this.appendChild(importedNode);
+        })
+      // inside of our d3.xml callback, call another function
+      // that styles individual paths inside of our imported svg
+
+      styleImportedSVG()
+    });
+
+
+    function styleImportedSVG() {
+      svg.select('svg')     
+        .attr('x', 100)
+        .attr('width', 300);
+        
+      d3.selectAll('path').call(tool_tip);
+      d3.selectAll('path')
+        .on('mouseover', function () {
+          d3.selectAll('path')
+            .style('cursor', 'pointer')
+            .style('fill-opacity', 0.1);
+          d3.selectAll('polygon')
+            .style('cursor', 'pointer')
+            .style('fill-opacity', 0.1);
+          tool_tip.show();
+        })
+        .on('mouseout', function () {
+          d3.selectAll('path')
+            .style('fill-opacity', 1);
+          d3.selectAll('polygon')
+            .style('fill-opacity', 1);
+          tool_tip.hide();
+        })
+    }
+
+
+  </script>
+</body>
+
+</html>
