@@ -4,7 +4,12 @@
 <head>
   <meta charset="utf-8">
   <title>SVG</title>
-
+  <link href="./css/bootstrap.min.css" rel="stylesheet">
+  <link href="./css/mdb.lite.min.css" rel="stylesheet">
+  <link href="./css/mdb.min.css" rel="stylesheet">
+  <link href="./css/font-awesome.min.css" rel="stylesheet">
+  <link href="./css/select2.min.css" rel="stylesheet">
+  <link href="./css/style.css" rel="stylesheet">
   <style>
     /* Make the chart container fill the page using CSS. */
 
@@ -49,9 +54,12 @@
   </style>
 </head>
 
-<body>  
-  <script src="d3.min.js" charset="utf-8"></script>
-  <script src="d3-tip.js" charset="utf-8"></script>
+<body>
+  <script type="text/javascript" src="./js/d3/d3.min.js"></script>
+  <script type="text/javascript" src="./js/d3/d3-tip.js"></script>
+  <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="./js/select2.min.js"></script>
+  <script type="text/javascript" src="./js/main.js"></script>
   <script>
     // Extract the width and height that was computed by CSS.    
 
@@ -71,11 +79,11 @@
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    
+
     // load the external svg from a file
     d3.xml("floor0.svg").mimeType("image/svg+xml").get(function (error, xml) {
       if (error) throw error;
-      
+
       var importedNode = document.importNode(xml.documentElement, true);
       console.log(xml.documentElement);
       console.log(xml.documentElement.getElementsByTagName("path"));
@@ -91,10 +99,10 @@
 
 
     function styleImportedSVG() {
-      svg.select('svg')     
+      svg.select('svg')
         .attr('x', 100)
         .attr('width', 300);
-        
+
       d3.selectAll('path').call(tool_tip);
       d3.selectAll('path')
         .on('mouseover', function () {
