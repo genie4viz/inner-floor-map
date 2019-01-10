@@ -71,7 +71,7 @@
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+    
     // load the external svg from a file
     d3.xml("floor0.svg").mimeType("image/svg+xml").get(function (error, xml) {
       if (error) throw error;

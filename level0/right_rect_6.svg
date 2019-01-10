@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 247.32 153.46">
+  <defs>
+    <style>
+      .c905eb8b-5b33-43ce-8ece-dadd26921e43 {
+        isolation: isolate;
+      }
+
+      .\33 2dec8cd-8ecd-479a-bbb9-7b8b5d9cbb26 {
+        fill: #a7a9ad;
+      }
+
+      .\37 d08950f-5ead-497e-b7ed-bc285c13a087 {
+        fill: #898b90;
+      }
+
+      .\35 0553c84-7a45-425d-88f7-f46a044eedb8 {
+        fill: #d9dade;
+      }
+    </style>
+  </defs>
+  <title>right_rect_6</title>
+  <g id="16b1ff9d-fc4c-4c90-b23a-62ed8f71a6c5" data-name="Layer 2">
+    <g id="02ff436a-b3e7-40cb-b233-cf70e080c9da" data-name="Layer 1">
+      <g class="c905eb8b-5b33-43ce-8ece-dadd26921e43">
+        <polygon class="32dec8cd-8ecd-479a-bbb9-7b8b5d9cbb26" points="247.32 90.16 241.26 111.89 66.16 153.46 72.22 131.72 247.32 90.16"/>
+        <polygon class="7d08950f-5ead-497e-b7ed-bc285c13a087" points="72.22 131.72 66.16 153.46 0 63.3 6.06 41.56 72.22 131.72"/>
+        <polygon class="50553c84-7a45-425d-88f7-f46a044eedb8" points="6.06 41.56 181.16 0 247.32 90.16 72.22 131.72 6.06 41.56"/>
+      </g>
+    </g>
+  </g>
+</svg>

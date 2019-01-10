@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172.23 163.19">
+  <defs>
+    <style>
+      .e82dd279-a669-40b0-98f9-a066f2e813ae {
+        isolation: isolate;
+      }
+
+      .\31 bbfe7d6-a0a3-4827-ba3f-6a839f705877 {
+        fill: #999b9f;
+      }
+
+      .\33 86dcf3e-bd35-42a1-a4d4-1b6f602d2805 {
+        fill: #7e8084;
+      }
+
+      .\30 2e5c2cc-e381-4301-b9d1-88ecec627767 {
+        fill: #c6c7cb;
+      }
+    </style>
+  </defs>
+  <title>left_rect_2</title>
+  <g id="25f87c7b-3f38-44ce-b5a5-5ac71e7c0420" data-name="Layer 2">
+    <g id="9cede209-0d2c-4668-bc66-2ac86b788947" data-name="Layer 1">
+      <g class="e82dd279-a669-40b0-98f9-a066f2e813ae">
+        <polygon class="1bbfe7d6-a0a3-4827-ba3f-6a839f705877" points="172.23 123.53 166.17 145.27 90.65 163.19 96.71 141.45 172.23 123.53"/>
+        <polygon class="386dcf3e-bd35-42a1-a4d4-1b6f602d2805" points="96.71 141.45 90.65 163.19 0 39.66 6.06 17.93 96.71 141.45"/>
+        <polygon class="02e5c2cc-e381-4301-b9d1-88ecec627767" points="81.56 0 172.23 123.53 96.71 141.45 6.06 17.93 81.56 0"/>
+      </g>
+    </g>
+  </g>
+</svg>

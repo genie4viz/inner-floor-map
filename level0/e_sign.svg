@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54.62 58.59">
+  <defs>
+    <style>
+      .\30 c32fd40-1b69-47ad-9f9c-7a0fe779514a {
+        isolation: isolate;
+      }
+
+      .\38 9156a40-59eb-459c-a8f9-f0f0df74aeda {
+        fill: #999b9f;
+      }
+
+      .dc78504c-6c3e-4eea-83bc-040e9b01e482 {
+        fill: #7e8084;
+      }
+
+      .\34 67d9135-88d4-407e-8e3f-b4df1ebaa093 {
+        fill: #c6c7cb;
+      }
+    </style>
+  </defs>
+  <title>e_sign</title>
+  <g id="cc251db1-3b33-488a-8104-c565062476a2" data-name="Layer 2">
+    <g id="bb651c9b-c623-4e6a-aae3-5bf38a1115f2" data-name="Layer 1">
+      <g class="0c32fd40-1b69-47ad-9f9c-7a0fe779514a">
+        <polygon class="89156a40-59eb-459c-a8f9-f0f0df74aeda" points="37.13 6.83 31.07 28.57 13.84 32.66 19.9 10.92 37.13 6.83"/>
+        <polygon class="89156a40-59eb-459c-a8f9-f0f0df74aeda" points="45.95 18.86 39.89 40.6 23.5 44.49 29.56 22.75 45.95 18.86"/>
+        <polygon class="89156a40-59eb-459c-a8f9-f0f0df74aeda" points="54.62 30.67 48.56 52.41 22.51 58.59 28.57 36.86 54.62 30.67"/>
+        <polygon class="dc78504c-6c3e-4eea-83bc-040e9b01e482" points="28.57 36.86 22.51 58.59 0 27.92 6.06 6.18 28.57 36.86"/>
+        <polygon class="467d9135-88d4-407e-8e3f-b4df1ebaa093" points="32.11 0 37.13 6.83 19.9 10.92 24.43 17.1 41.66 13.01 45.95 18.86 29.56 22.75 34.33 29.25 50.72 25.36 54.62 30.67 28.57 36.86 6.06 6.18 32.11 0"/>
+      </g>
+    </g>
+  </g>
+</svg>
