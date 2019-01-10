@@ -20,7 +20,7 @@ var svg = d3
 var tool_tip = d3.tip()
   .attr("class", "d3-tip")
   .offset([-8, 0])
-  .html(function (d) { console.log(d); return "Shape1"; });
+  .html(function (d) { return d; });
 
 // load the external svg from a file
 jQuery.ajax({
@@ -41,24 +41,24 @@ level0
         .each(function () {
           this.appendChild(importedNode);
         })
-
+        
+      svg.select('svg#' + importedNode.id).call(tool_tip);
       svg.select('svg#' + importedNode.id)
         .attr("x", item.x)
         .attr("y", item.y)
         .attr("width", 100)
         .attr("height", 100)
-        .on('mouseover', function () {          
+        .on('mouseover', function () {
           svg.select('svg#' + importedNode.id)
             .style('cursor', 'pointer')
             .style('fill-opacity', 0.3);
-          // d3.selectAll('polygon')
-          //   .style('cursor', 'pointer')
-          //   .style('fill-opacity', 0.1);
-          // tool_tip.show();
+
+          tool_tip.show(importedNode.id);
         })
-        .on('mouseout', function () {          
+        .on('mouseout', function () {
           svg.select('svg#' + importedNode.id)
             .style('fill-opacity', 1);
+          tool_tip.hide();
         })
 
       //styleImportedSVG(importedNode.id);
