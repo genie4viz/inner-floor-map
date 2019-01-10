@@ -64,7 +64,7 @@
     var tool_tip = d3.tip()
       .attr("class", "d3-tip")
       .offset([-8, 0])
-      .html(function (d) { return "Shape1"; });
+      .html(function (d) { console.log(d); return "Shape1"; });
 
     var svg = d3.select("body").append("svg")
       .attr("width", width + margin.left + margin.right)
@@ -73,12 +73,12 @@
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     // load the external svg from a file
-    d3.xml("shape1.svg").mimeType("image/svg+xml").get(function (error, xml) {
+    d3.xml("floor0.svg").mimeType("image/svg+xml").get(function (error, xml) {
       if (error) throw error;
       
       var importedNode = document.importNode(xml.documentElement, true);
       console.log(xml.documentElement);
-      console.log(xml.documentElement.getElementsByTagName("g"));
+      console.log(xml.documentElement.getElementsByTagName("path"));
       svg
         .each(function () {
           this.appendChild(importedNode);
@@ -86,7 +86,7 @@
       // inside of our d3.xml callback, call another function
       // that styles individual paths inside of our imported svg
 
-      styleImportedSVG()
+      styleImportedSVG();
     });
 
 
