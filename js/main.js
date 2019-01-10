@@ -1,5 +1,4 @@
-
-
+var block_names = ["right_wing0", "center_hall", "top_wing0", "left_wing0", "top_wing1", "left_wing1", "right_wing1", "right_rect0", "center_rect0", "right_rect1", "left_rect0", "center_ga", "left_rect1", "left_rect2", "right_rect2", "sign_e", "right_rect3", "left_rect3", "right_tri0", "right_rect4", "combine_left", "left_rect4"];
 // on window resize
 $(window).resize(function () {
   // Resize SVG
@@ -26,91 +25,27 @@ var tool_tip = d3.tip()
 d3.xml("mapinfo/level0.svg").mimeType("image/svg+xml").get(function (error, xml) {
   if (error) throw error;
 
-  var importedNode = document.importNode(xml.documentElement, true);
-  // importedNode.id = item.id;
+  var importedNode = document.importNode(xml.documentElement, true);  
   svg
     .each(function () {
       this.appendChild(importedNode);
-    })
+    });
 
-  // svg.select('svg#' + importedNode.id).call(tool_tip);
-  // svg.select('svg#' + importedNode.id)
-  //   .attr("x", item.x)
-  //   .attr("y", item.y)
-  //   .attr("width", 100)
-  //   .attr("height", 100)
-  //   .on('mouseover', function () {
-  //     svg.select('svg#' + importedNode.id)
-  //       .style('cursor', 'pointer')
-  //       .style('fill-opacity', 0.3);
+  block_names.forEach(b_name => {
+    svg
+      .select("g#" + b_name)
+      .call(tool_tip)
+      .on('mouseover', function () {
+        svg.select("g#" + b_name)
+          .style('cursor', 'pointer')
+          .style('fill-opacity', 0.3);
+        tool_tip.show(b_name);
+      })
+      .on('mouseout', function () {
+        svg.select("g#" + b_name)
+          .style('fill-opacity', 1);
+        tool_tip.hide();
+      });
 
-  //     tool_tip.show(importedNode.id);
-  //   })
-  //   .on('mouseout', function () {
-  //     svg.select('svg#' + importedNode.id)
-  //       .style('fill-opacity', 1);
-  //     tool_tip.hide();
-  //   })
-
-  //styleImportedSVG(importedNode.id);
+  });
 });
-
-// level0
-//   .forEach(function (item) {
-//     d3.xml("mapinfo/level0/" + item.id + ".svg").mimeType("image/svg+xml").get(function (error, xml) {
-//       if (error) throw error;
-
-//       var importedNode = document.importNode(xml.documentElement, true);
-//       importedNode.id = item.id;
-//       svg
-//         .each(function () {
-//           this.appendChild(importedNode);
-//         })
-
-//       svg.select('svg#' + importedNode.id).call(tool_tip);
-//       svg.select('svg#' + importedNode.id)
-//         .attr("x", item.x)
-//         .attr("y", item.y)
-//         .attr("width", 100)
-//         .attr("height", 100)
-//         .on('mouseover', function () {
-//           svg.select('svg#' + importedNode.id)
-//             .style('cursor', 'pointer')
-//             .style('fill-opacity', 0.3);
-
-//           tool_tip.show(importedNode.id);
-//         })
-//         .on('mouseout', function () {
-//           svg.select('svg#' + importedNode.id)
-//             .style('fill-opacity', 1);
-//           tool_tip.hide();
-//         })
-
-//       //styleImportedSVG(importedNode.id);
-//     });
-//   })
-
-// function styleImportedSVG(c_id) {
-//   //console.log(svg.selectAll('svg'));
-//   // .filter(function(c_svg){ console.log(c_svg); return c_svg.id == c_id})
-//   // .attr("width", 50)
-//   // .attr("height", 50);
-//   // d3.selectAll('path').call(tool_tip);
-//   // d3.selectAll('path')
-//   //   .on('mouseover', function () {
-//   //     d3.selectAll('path')
-//   //       .style('cursor', 'pointer')
-//   //       .style('fill-opacity', 0.1);
-//   //     d3.selectAll('polygon')
-//   //       .style('cursor', 'pointer')
-//   //       .style('fill-opacity', 0.1);
-//   //     tool_tip.show();
-//   //   })
-//   //   .on('mouseout', function () {
-//   //     d3.selectAll('path')
-//   //       .style('fill-opacity', 1);
-//   //     d3.selectAll('polygon')
-//   //       .style('fill-opacity', 1);
-//   //     tool_tip.hide();
-//   //   })
-// }
