@@ -1,24 +1,19 @@
-// variables for catching min and max zoom factors
-var minZoom;
-var maxZoom;
-w = 3035;
-h = 2915;
+// create an SVG
+var maxZoom, minZoom;
+var svg;
 
-var block_names = ["right_wing0", "center_hall", "top_wing0", "left_wing0", "top_wing1", "left_wing1", "right_wing1", "right_rect0", "center_rect0", "right_rect1", "left_rect0", "center_ga", "left_rect1", "left_rect2", "right_rect2", "sign_e", "right_rect3", "left_rect3", "right_tri0", "right_rect4", "combine_left", "left_rect4"];
+var block_names = ["right_pier", "center_hall", "front_pier", "left_pier", "main_hall"];
 
 // Create function to apply zoom to countriesGroup
 function zoomed() {
-  t = d3
-    .event
-    .transform;
-
-  svg
-    .transition()
-    .attr("transform", "translate(" + [0, 0] + ")scale(" + t.k + ")");
+  levelGroup.attr("transform", d3.event.transform);
 }
+
+
 // Define map zoom behaviour
 var zoom = d3
   .zoom()
+  .scaleExtent([1 / 2, 4])
   .on("zoom", zoomed);
 
 // on window resize
@@ -30,14 +25,10 @@ $(window).resize(function () {
   initiateZoom();
 });
 
-// create an SVG
-var svg;
-
 var tool_tip = d3.tip()
   .attr("class", "d3-tip")
   .offset([-8, 0])
-  .html(function (d) { return d; });
-
+  .html(d => d);
 
 d3.xml("mapinfo/level0.svg").mimeType("image/svg+xml").get(function (error, xml) {
   if (error) throw error;
@@ -49,13 +40,17 @@ d3.xml("mapinfo/level0.svg").mimeType("image/svg+xml").get(function (error, xml)
     .each(function () {
       this.appendChild(importedNode);
     });
-    
+
   svg = d3.select("svg")
     .attr("width", $("#map-holder").width())
     .attr("height", $("#map-holder").height())
     .call(zoom);
 
+  levelGroup = svg.select("g#level0");
+
+
   block_names.forEach(b_name => {
+
     svg
       .select("g#" + b_name)
       .call(tool_tip)
@@ -73,11 +68,11 @@ d3.xml("mapinfo/level0.svg").mimeType("image/svg+xml").get(function (error, xml)
       .on('click', function () {
         //console.log(svg.select("g#" + b_name).node().getBoundingClientRect());
         //console.log(getBoundingBoxCenter(svg.select("g#" + b_name)));
-        boxZoom(svg.select("g#" + b_name).node().getBBox(), getBoundingBoxCenter(svg.select("g#" + b_name)), 100);
+        //boxZoom(svg.select("g#" + b_name).node().getBBox(), getBoundingBoxCenter(svg.select("g#" + b_name)), 100);
       });
 
   });
-  initiateZoom();
+  zoom.scaleTo(svg.transition(), 1);
 });
 // zoom to show a bounding box, with optional additional padding as percentage of box size
 function boxZoom(box, centroid, paddingPerc) {
@@ -129,33 +124,13 @@ function getBoundingBoxCenter(selection) {
   return [bbox.x + bbox.width / 2, bbox.y + bbox.height / 2];
 }
 
-// Function that calculates zoom/pan limits and sets zoom to default value 
-function initiateZoom() {
-
-  minZoom = Math.max($("#map-holder").width() / w, $("#map-holder").height() / h);
-  // set max zoom to a suitable factor of this value
-  maxZoom = 20 * minZoom;
-  // set extent of zoom to chosen values
-  // set translate extent so that panning can't cause map to move out of viewport
-  zoom
-    .scaleExtent([minZoom, maxZoom])
-    .translateExtent([[0, 0], [w, h]]);
-
-  // define X and Y offset for centre of map to be shown in centre of holder
-  midX = ($("#map-holder").width() - minZoom * w) / 2;
-  midY = ($("#map-holder").height() - minZoom * h) / 2;
-
-  // change zoom transform to min zoom and centre offsets
-  svg.call(zoom.transform, d3.zoomIdentity.translate(midX, midY).scale(minZoom));
-}
-
 //handler for zoom home/in/out
 $('#zoom-home').on('click', function () {
-  initiateZoom();
+  zoom.scaleTo(svg.transition(), 1);
 });
 $('#zoom-in').on('click', function () {
-  zoom.scaleBy(d3.select("svg"), 1.2);
+  zoom.scaleBy(svg.transition(), 1.2);
 });
 $('#zoom-out').on('click', function () {
-  zoom.scaleBy(d3.select("svg"), 0.8);
+  zoom.scaleBy(svg.transition(), 0.8);
 });
