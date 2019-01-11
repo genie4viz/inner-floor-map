@@ -11,10 +11,10 @@ function zoomed() {
   t = d3
     .event
     .transform;
-
+  
   svg
     .transition()
-    .attr("transform", "translate(" + [t.x, t.y] + ")scale(" + t.k + ")");
+    .attr("transform", "translate(" + [0, 0] + ")scale(" + t.k + ")");
 }
 // Define map zoom behaviour
 var zoom = d3
@@ -22,8 +22,8 @@ var zoom = d3
   .on("zoom", zoomed);
 
 // on window resize
-$(window).resize(function () {
-  // Resize SVG
+$(window).resize(function () {  
+  // Resize SVG  
   w = $("#map-holder").width();
   h = $("#map-holder").height();
   svg
@@ -50,6 +50,7 @@ d3.xml("mapinfo/level0.svg").mimeType("image/svg+xml").get(function (error, xml)
   if (error) throw error;
 
   var importedNode = document.importNode(xml.documentElement, true);
+  
   svg
     .each(function () {
       this.appendChild(importedNode);
@@ -82,8 +83,8 @@ d3.xml("mapinfo/level0.svg").mimeType("image/svg+xml").get(function (error, xml)
 // zoom to show a bounding box, with optional additional padding as percentage of box size
 function boxZoom(box, centroid, paddingPerc) {
 
-  console.log(box)
-  console.log(centroid)
+  // console.log(box)
+  // console.log(centroid)
   // minXY = box.x;
   // maxXY = box[1];
   // find size of block area defined
@@ -132,8 +133,8 @@ function getBoundingBoxCenter(selection) {
 }
 
 // Function that calculates zoom/pan limits and sets zoom to default value 
-function initiateZoom() {
-  // Define a "minzoom" whereby the "Countries" is as small possible without leaving white space at top/bottom or sides
+function initiateZoom() {    
+
   minZoom = Math.max($("#map-holder").width() / w, $("#map-holder").height() / h);
   // set max zoom to a suitable factor of this value
   maxZoom = 20 * minZoom;
@@ -142,11 +143,13 @@ function initiateZoom() {
   zoom
     .scaleExtent([minZoom, maxZoom])
     .translateExtent([[0, 0], [w, h]]);
-  // define X and Y offset for centre of map to be shown in centre of holder  
+
+  // define X and Y offset for centre of map to be shown in centre of holder
   midX = ($("#map-holder").width() - minZoom * w) / 2;
   midY = ($("#map-holder").height() - minZoom * h) / 2;
+  
   // change zoom transform to min zoom and centre offsets
-  svg.call(zoom.transform, d3.zoomIdentity.translate(midX, midY).scale((maxZoom - minZoom)));
+  svg.call(zoom.transform, d3.zoomIdentity.translate(midX, midY).scale(minZoom));
 }
 
 //handler for zoom home/in/out
