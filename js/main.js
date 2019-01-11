@@ -1,8 +1,8 @@
 // variables for catching min and max zoom factors
 var minZoom;
 var maxZoom;
-w = window.innerWidth;
-h = window.innerHeight;
+w = 3035;
+h = 2915;
 
 var block_names = ["right_wing0", "center_hall", "top_wing0", "left_wing0", "top_wing1", "left_wing1", "right_wing1", "right_rect0", "center_rect0", "right_rect1", "left_rect0", "center_ga", "left_rect1", "left_rect2", "right_rect2", "sign_e", "right_rect3", "left_rect3", "right_tri0", "right_rect4", "combine_left", "left_rect4"];
 
@@ -11,7 +11,7 @@ function zoomed() {
   t = d3
     .event
     .transform;
-  
+
   svg
     .transition()
     .attr("transform", "translate(" + [0, 0] + ")scale(" + t.k + ")");
@@ -22,10 +22,8 @@ var zoom = d3
   .on("zoom", zoomed);
 
 // on window resize
-$(window).resize(function () {  
-  // Resize SVG  
-  w = $("#map-holder").width();
-  h = $("#map-holder").height();
+$(window).resize(function () {
+  // Resize SVG      
   svg
     .attr("width", $("#map-holder").width())
     .attr("height", $("#map-holder").height());
@@ -33,12 +31,7 @@ $(window).resize(function () {
 });
 
 // create an SVG
-var svg = d3
-  .select("#map-holder")
-  .append("svg")
-  // set to the same size as the "map-holder" div
-  .attr("width", $("#map-holder").width())
-  .attr("height", $("#map-holder").height());
+var svg;
 
 var tool_tip = d3.tip()
   .attr("class", "d3-tip")
@@ -50,11 +43,17 @@ d3.xml("mapinfo/level0.svg").mimeType("image/svg+xml").get(function (error, xml)
   if (error) throw error;
 
   var importedNode = document.importNode(xml.documentElement, true);
-  
-  svg
+
+  d3
+    .select("#map-holder")
     .each(function () {
       this.appendChild(importedNode);
     });
+    
+  svg = d3.select("svg")
+    .attr("width", $("#map-holder").width())
+    .attr("height", $("#map-holder").height())
+    .call(zoom);
 
   block_names.forEach(b_name => {
     svg
@@ -83,20 +82,18 @@ d3.xml("mapinfo/level0.svg").mimeType("image/svg+xml").get(function (error, xml)
 // zoom to show a bounding box, with optional additional padding as percentage of box size
 function boxZoom(box, centroid, paddingPerc) {
 
-  // console.log(box)
-  // console.log(centroid)
-  // minXY = box.x;
-  // maxXY = box[1];
   // find size of block area defined
-  zoomWidth = box.width;//Math.abs(minXY[0] - maxXY[0]);
-  zoomHeight = box.height;//Math.abs(minXY[1] - maxXY[1]);
+  zoomWidth = Math.abs(w - box.width);//Math.abs(minXY[0] - maxXY[0]);
+  zoomHeight = Math.abs(h - box.height);//Math.abs(minXY[1] - maxXY[1]);
+
   // find midpoint of block area defined
   zoomMidX = centroid[0];
   zoomMidY = centroid[1];
+  console.log(zoomMidX + ":" + zoomMidY)
   // increase block area to include padding
   zoomWidth = zoomWidth * (1 + paddingPerc / 100);
   zoomHeight = zoomHeight * (1 + paddingPerc / 100);
-  // find scale required for area to fill svg
+  // find scale required for area to fill svg  
   maxXscale = $("svg").width() / zoomWidth;
   maxYscale = $("svg").height() / zoomHeight;
   zoomScale = Math.min(maxXscale, maxYscale);
@@ -118,7 +115,7 @@ function boxZoom(box, centroid, paddingPerc) {
   svg
     .call(
       zoom.transform,
-      d3.zoomIdentity.translate(dleft, dtop).scale(zoomScale)
+      d3.zoomIdentity.translate(zoomMidX, zoomMidY).scale(1.5)
     );
 }
 //get selected block's centroid position
@@ -133,7 +130,7 @@ function getBoundingBoxCenter(selection) {
 }
 
 // Function that calculates zoom/pan limits and sets zoom to default value 
-function initiateZoom() {    
+function initiateZoom() {
 
   minZoom = Math.max($("#map-holder").width() / w, $("#map-holder").height() / h);
   // set max zoom to a suitable factor of this value
@@ -147,7 +144,7 @@ function initiateZoom() {
   // define X and Y offset for centre of map to be shown in centre of holder
   midX = ($("#map-holder").width() - minZoom * w) / 2;
   midY = ($("#map-holder").height() - minZoom * h) / 2;
-  
+
   // change zoom transform to min zoom and centre offsets
   svg.call(zoom.transform, d3.zoomIdentity.translate(midX, midY).scale(minZoom));
 }
