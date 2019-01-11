@@ -82,44 +82,43 @@ d3.xml("mapinfo/level0.svg").mimeType("image/svg+xml").get(function (error, xml)
 // zoom to show a bounding box, with optional additional padding as percentage of box size
 function boxZoom(box, centroid, paddingPerc) {
 
-  // console.log(box)
-  // console.log(centroid)
-  // // minXY = box.x;
-  // // maxXY = box[1];
-  // // find size of block area defined
-  // zoomWidth = box.width;//Math.abs(minXY[0] - maxXY[0]);
-  // zoomHeight = box.height;//Math.abs(minXY[1] - maxXY[1]);
-  // // find midpoint of block area defined
-  // zoomMidX = centroid[0];
-  // zoomMidY = centroid[1];
-  // // increase block area to include padding
-  // zoomWidth = zoomWidth * (1 + paddingPerc / 100);
-  // zoomHeight = zoomHeight * (1 + paddingPerc / 100);
-  // // find scale required for area to fill svg
-  // maxXscale = $("svg").width() / zoomWidth;
-  // maxYscale = $("svg").height() / zoomHeight;
-  // zoomScale = Math.min(maxXscale, maxYscale);
-  // // // handle some edge cases
-  // // // limit to max zoom (handles tiny countries)
-  // // zoomScale = Math.min(zoomScale, maxZoom);
-  // // // limit to min zoom (handles large countries and countries that span the date line)
-  // // zoomScale = Math.max(zoomScale, minZoom);
-  // // // Find screen pixel equivalent once scaled
-  // console.log(zoomScale)
-  // offsetX = zoomScale * zoomMidX;
-  // offsetY = zoomScale * zoomMidY;
-  // // Find offset to centre, making sure no gap at left or top of holder
-  // dleft = Math.min(0, $("svg").width() / 2);
-  // dtop = Math.min(0, $("svg").height() / 2);
-  // // Make sure no gap at bottom or right of holder
-  // dleft = Math.max($("svg").width() - w * zoomScale, dleft);
-  // dtop = Math.max($("svg").height() - h * zoomScale, dtop);
-  // // set zoom
-  // svg
-  //   .call(
-  //     zoom.transform,
-  //     d3.zoomIdentity.translate(dleft, dtop).scale(zoomScale)
-  //   );
+  console.log(box)
+  console.log(centroid)
+  // minXY = box.x;
+  // maxXY = box[1];
+  // find size of block area defined
+  zoomWidth = box.width;//Math.abs(minXY[0] - maxXY[0]);
+  zoomHeight = box.height;//Math.abs(minXY[1] - maxXY[1]);
+  // find midpoint of block area defined
+  zoomMidX = centroid[0];
+  zoomMidY = centroid[1];
+  // increase block area to include padding
+  zoomWidth = zoomWidth * (1 + paddingPerc / 100);
+  zoomHeight = zoomHeight * (1 + paddingPerc / 100);
+  // find scale required for area to fill svg
+  maxXscale = $("svg").width() / zoomWidth;
+  maxYscale = $("svg").height() / zoomHeight;
+  zoomScale = Math.min(maxXscale, maxYscale);
+  // handle some edge cases
+  // limit to max zoom (handles tiny countries)
+  zoomScale = Math.min(zoomScale, maxZoom);
+  // limit to min zoom (handles large countries and countries that span the date line)
+  zoomScale = Math.max(zoomScale, minZoom);
+  // Find screen pixel equivalent once scaled  
+  offsetX = zoomScale * zoomMidX;
+  offsetY = zoomScale * zoomMidY;
+  // Find offset to centre, making sure no gap at left or top of holder
+  dleft = Math.min(0, $("svg").width() / 2);
+  dtop = Math.min(0, $("svg").height() / 2);
+  // Make sure no gap at bottom or right of holder
+  dleft = Math.max($("svg").width() - w * zoomScale, dleft);
+  dtop = Math.max($("svg").height() - h * zoomScale, dtop);
+  // set zoom
+  svg
+    .call(
+      zoom.transform,
+      d3.zoomIdentity.translate(dleft, dtop).scale(zoomScale)
+    );
 }
 //get selected block's centroid position
 function getBoundingBoxCenter(selection) {
@@ -147,6 +146,16 @@ function initiateZoom() {
   midX = ($("#map-holder").width() - minZoom * w) / 2;
   midY = ($("#map-holder").height() - minZoom * h) / 2;
   // change zoom transform to min zoom and centre offsets
-  svg.call(zoom.transform, d3.zoomIdentity.translate(midX, midY).scale((maxZoom - minZoom) / 21));
+  svg.call(zoom.transform, d3.zoomIdentity.translate(midX, midY).scale((maxZoom - minZoom)));
 }
 
+//handler for zoom home/in/out
+$('#zoom-home').on('click', function () {
+  initiateZoom();
+});
+$('#zoom-in').on('click', function () {
+  zoom.scaleBy(d3.select("svg"), 1.2);
+});
+$('#zoom-out').on('click', function () {
+  zoom.scaleBy(d3.select("svg"), 0.8);
+});
