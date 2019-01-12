@@ -1,28 +1,41 @@
 // create an SVG
 var maxZoom, minZoom;
 var svg;
+w = 2293;
+h = 2139;
 
 var block_names = ["right_pier", "center_hall", "front_pier", "left_pier", "main_hall"];
 
 // Create function to apply zoom to countriesGroup
 function zoomed() {
-  levelGroup.attr("transform", d3.event.transform);
-}
+  t = d3.event.transform;
 
+  width = $("#map-holder").width();
+  height = $("#map-holder").height();
+
+  tx = Math.min(0, Math.max(t.x, w - w * t.k));
+  ty = Math.min(0, Math.max(t.y, h - h * t.k));
+
+  d3.zoomIdentity.translate([tx, ty]);
+  levelGroup
+    .transition().duration(300)
+    .attr("transform", "translate(" + [tx, ty] + ")scale(" + t.k + ")");
+
+}
 
 // Define map zoom behaviour
 var zoom = d3
   .zoom()
-  .scaleExtent([1 / 2, 4])
+  .scaleExtent([1, 4])
   .on("zoom", zoomed);
 
 // on window resize
 $(window).resize(function () {
-  // Resize SVG      
+  // Resize SVG
   svg
     .attr("width", $("#map-holder").width())
     .attr("height", $("#map-holder").height());
-  initiateZoom();
+  zoom.scaleTo(svg.transition(), 1);
 });
 
 var tool_tip = d3.tip()
@@ -46,8 +59,7 @@ d3.xml("mapinfo/level0.svg").mimeType("image/svg+xml").get(function (error, xml)
     .attr("height", $("#map-holder").height())
     .call(zoom);
 
-  levelGroup = svg.select("g#level0");
-
+  levelGroup = d3.select("g#level0");
 
   block_names.forEach(b_name => {
 
@@ -72,7 +84,7 @@ d3.xml("mapinfo/level0.svg").mimeType("image/svg+xml").get(function (error, xml)
       });
 
   });
-  zoom.scaleTo(svg.transition(), 1);
+  //initiateZoom();
 });
 // zoom to show a bounding box, with optional additional padding as percentage of box size
 function boxZoom(box, centroid, paddingPerc) {
@@ -123,6 +135,8 @@ function getBoundingBoxCenter(selection) {
   // return the center of the bounding box
   return [bbox.x + bbox.width / 2, bbox.y + bbox.height / 2];
 }
+
+
 
 //handler for zoom home/in/out
 $('#zoom-home').on('click', function () {

@@ -1,0 +1,4 @@
+1. export: inline, minimal
+2. remove <def>,<title>
+https://www.mapplic.com/mall-map/
+
