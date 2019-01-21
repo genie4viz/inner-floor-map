@@ -89,7 +89,7 @@ d3.xml("mapinfo/level01.svg").mimeType("image/svg+xml").get(function (error, xml
         node = d3.select(this);
         var transform = getTransform(node, 32);
 
-        svg.transition().call(zoom.transform, d3.zoomIdentity.translate(transform.translate[0], transform.translate[1]).scale(transform.scale))
+        svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(transform.translate[0], transform.translate[1]).scale(transform.scale))
         scale = transform.scale;
       });
 
@@ -133,7 +133,11 @@ $(document).ready(function () {
     error: function (err) {
       console.log(err);
     }
-  });  
+  });
+
+  //floor spinner
+  
+  //var spinner = $("#spinner-floor").spinner();
 
   var data = $.map(level_info, function (obj) {
     obj.id = obj.layer_name; // replace id with your identifier
@@ -150,7 +154,7 @@ $(document).ready(function () {
     var data = e.params.data;
     node = d3.select("g#" + data.id);
     var transform = getTransform(node, 32);
-    svg.transition().call(zoom.transform, d3.zoomIdentity.translate(transform.translate[0], transform.translate[1]).scale(transform.scale))
+    svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(transform.translate[0], transform.translate[1]).scale(transform.scale))
     scale = transform.scale;
   });
 });

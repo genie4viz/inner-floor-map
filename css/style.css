@@ -115,3 +115,10 @@ html, body {
   opacity: 0.9;
   z-index: 10;
 }
+.floor-selector-container {
+  position: fixed;
+  right: 6px;
+  top: 4px;
+  width: 150px;/* width: auto*/  
+  z-index: 10;
+}
