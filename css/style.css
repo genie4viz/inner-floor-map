@@ -105,3 +105,13 @@ html, body {
 .zoom-out:hover{
   background: #333;
 }
+
+/* select pane for company */
+.building-selector-container {
+  position: fixed;
+  right: 6px;
+  bottom: 4px;
+  width: 150px;/* width: auto*/
+  opacity: 0.9;
+  z-index: 10;
+}
