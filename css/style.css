@@ -117,8 +117,9 @@ html, body {
 }
 .floor-selector-container {
   position: fixed;
-  right: 6px;
+  right: 4px;
   top: 4px;
-  width: 150px;/* width: auto*/  
+  width: auto;/* width: auto*/  
+  height: auto;
   z-index: 10;
 }
