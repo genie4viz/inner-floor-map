@@ -6,6 +6,8 @@ h = 1498;
 
 var scale = 1.0;
 
+let cur_level = 1;
+let level_names = ["ARRIVAL", "LEVEL2", "DEPARTURE", "LEVEL4"];
 let level_info = [];
 
 // Create function to apply zoom to countriesGroup
@@ -136,8 +138,38 @@ $(document).ready(function () {
   });
 
   //floor spinner
-  
-  //var spinner = $("#spinner-floor").spinner();
+
+  $('.dropdown-menu a.dropdown-item').on("click", function (e) {    
+    $('.dropdown-menu > a').removeClass('active');
+    $(event.target).addClass('active');    
+    $('#btnDropDown').html($(event.target).text());
+
+    for(i = 0; i < level_names.length; i++){
+      if(level_names[i] == $(event.target).text()){
+        cur_level = i + 1;
+        break;
+      }
+    }    
+  });
+
+  $('#up-floor').on('click', function () {
+    if (cur_level < 4) {
+      cur_level++;
+      $('.dropdown-menu > a').removeClass('active');
+      $('.dropdown-menu a:nth-child(' + cur_level + ')').addClass('active');
+      let cur_text = $('.dropdown-menu a:nth-child(' + cur_level + ')').text();
+      $('#btnDropDown').html(cur_text);
+    }
+  })
+  $('#down-floor').on('click', function () {
+    if (cur_level > 1) {
+      cur_level--;
+      $('.dropdown-menu > a').removeClass('active');
+      $(".dropdown-menu a:nth-child(" + cur_level + ")").addClass("active");
+      let cur_text = $('.dropdown-menu a:nth-child(' + cur_level + ')').text();
+      $('#btnDropDown').html(cur_text);
+    }
+  })
 
   var data = $.map(level_info, function (obj) {
     obj.id = obj.layer_name; // replace id with your identifier

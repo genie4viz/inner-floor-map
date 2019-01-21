@@ -123,3 +123,9 @@ html, body {
   height: auto;
   z-index: 10;
 }
+/* floor-button */
+.btn-focus {
+  width:130px;
+  font-size: 12px;
+  font-weight: bold;
+}
