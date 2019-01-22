@@ -84,7 +84,7 @@ d3.xml("mapinfo/level01.svg").mimeType("image/svg+xml").get(function (error, xml
           .style('fill-opacity', 1);
         tool_tip.hide();
       })
-      .on('click', function () {        
+      .on('click', function () {
         if (d3.event.defaultPrevented) {
           return; // panning, not clicking
         }
@@ -93,7 +93,7 @@ d3.xml("mapinfo/level01.svg").mimeType("image/svg+xml").get(function (error, xml
         svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(transform.translate[0], transform.translate[1]).scale(transform.scale))
         scale = transform.scale;
         $('div#list-buildings > a').removeClass('active');
-        $('div#list-buildings a:nth-child(' + i + ')').addClass('active');        
+        $('div#list-buildings a:nth-child(' + (i + 1) + ')').addClass('active');
       });
 
   });
@@ -183,3 +183,19 @@ $(document).ready(function () {
     }
   })
 });
+
+//key event
+$('#search-input-text').keydown(function () {
+  var filter, txtValue;
+  filter = $(this).val().toUpperCase();
+  list = $('#list-buildings');
+  $("#list-buildings > a").each(function () {
+    txtValue = $(this).text() || $(this).text().filter(":contains('More')");
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      $(this).css("display", "");
+    } else {
+      $(this).css("display", "none");
+    }
+  });
+});
+
