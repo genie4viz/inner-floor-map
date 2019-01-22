@@ -55,6 +55,8 @@ d3.xml("mapinfo/level01.svg").mimeType("image/svg+xml").get(function (error, xml
     .attr("height", $("#map-holder").height())
     .call(zoom);
 
+  $(window).resize();
+
   levelGroup = d3.select("g#level01");
 
   bbox = levelGroup.node().getBBox();
@@ -187,7 +189,7 @@ $(document).ready(function () {
 //key event
 $('#search-input-text').keyup(function () {
   var filter, txtValue;
-  filter = $(this).val().toUpperCase();  
+  filter = $(this).val().toUpperCase();
   list = $('#list-buildings');
   $("#list-buildings > a").each(function () {
     txtValue = $(this).text() || $(this).text().filter(":contains('More')");

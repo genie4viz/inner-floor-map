@@ -3,20 +3,17 @@
 }
 
 html, body {
-  position: fixed;
+  position: relative;
   width: 100%;
   height: 100%;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;  
 }
-.container {
-  width: 100vw;
-  height: 100vh;
+.container-fluid {
+  width: 100%;
+  height: 100%;
 }
-#map-holder {
-  width: 100vw;
-  height: 100vh;/*100vh;*/
-}
+
 /*-----------d3-tip-------------*/
 .d3-tip {
   line-height: 1;
@@ -51,7 +48,7 @@ html, body {
 /*zoom buttons*/
 .zoom-home {
   position: fixed;
-  left:230px;
+  left:4px;
   bottom: 64px;
   box-shadow: 2px 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);      
   color: white;
@@ -70,7 +67,7 @@ html, body {
 
 .zoom-in {
   position: fixed;
-  left:230px;
+  left:4px;
   bottom: 34px;
   box-shadow: 2px 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);      
   color: white;
@@ -89,7 +86,7 @@ html, body {
 
 .zoom-out {
   position: fixed;
-  left:230px;
+  left:4px;
   bottom: 4px;
   box-shadow: 2px 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);      
   color: white;
@@ -108,28 +105,20 @@ html, body {
 
 
 /* select pane for building */
-.building-search-bar {
-  position: fixed;
-  top: 4px;
-  left: 6px;  
-  width: 220px;/* width: auto*/
+.building-search-container {
+  width: 100%;
+  height: 100%;
+}
+.building-search-bar {      
   height: auto;
-  opacity: 0.9;
-  z-index: 2;  
 }
 .search-text {
   height: 40px;
   font-size: 14px;
 }
-.building-selector-container {
-  position: fixed;
-  top: 50px;
-  left: 6px;
-  bottom: 2px;
-  width: auto;/* width: auto*/
-  height: auto;
-  opacity: 0.9;
-  z-index: 2;
+.building-selector-container {      
+  width: 100%;/* width: auto*/
+  height: calc(100% - 48px);  
   box-shadow: 2px 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);      
 }
 .list-group-item {
@@ -137,7 +126,7 @@ html, body {
 }
 .floor-selector-container {
   position: fixed;
-  right: 4px;
+  left: 4px;
   top: 4px;
   width: auto;/* width: auto*/  
   height: auto;
