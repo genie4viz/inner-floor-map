@@ -13,7 +13,10 @@ html, body {
   width: 100%;
   height: 100%;
 }
-
+.map-container {
+  width: 100%;
+  height: 100%;
+}
 /*-----------d3-tip-------------*/
 .d3-tip {
   line-height: 1;

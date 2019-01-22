@@ -28,6 +28,7 @@ var zoom = d3
 // on window resize
 $(window).resize(function () {
   // Resize SVG
+
   svg
     .attr("width", $("#map-holder").width())
     .attr("height", $("#map-holder").height());
@@ -55,7 +56,6 @@ d3.xml("mapinfo/level01.svg").mimeType("image/svg+xml").get(function (error, xml
     .attr("height", $("#map-holder").height())
     .call(zoom);
 
-  $(window).resize();
 
   levelGroup = d3.select("g#level01");
 
@@ -125,7 +125,7 @@ $('#zoom-out').on('click', function () {
 
 //setting for select
 $(document).ready(function () {
-
+ 
   //load level info
   jQuery.ajax({
     dataType: "json",
