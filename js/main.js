@@ -185,9 +185,9 @@ $(document).ready(function () {
 });
 
 //key event
-$('#search-input-text').keydown(function () {
+$('#search-input-text').keyup(function () {
   var filter, txtValue;
-  filter = $(this).val().toUpperCase();
+  filter = $(this).val().toUpperCase();  
   list = $('#list-buildings');
   $("#list-buildings > a").each(function () {
     txtValue = $(this).text() || $(this).text().filter(":contains('More')");
