@@ -68,7 +68,7 @@ d3.xml("mapinfo/level01.svg").mimeType("image/svg+xml").get(function (error, xml
     .attr("viewBox", defaultView)
     .attr("preserveAspectRatio", "xMidYMid meet")
 
-  level_info.forEach(building => {
+  level_info.some(function (building, i) {
 
     svg
       .select("g#" + building.layer_name)
@@ -84,15 +84,16 @@ d3.xml("mapinfo/level01.svg").mimeType("image/svg+xml").get(function (error, xml
           .style('fill-opacity', 1);
         tool_tip.hide();
       })
-      .on('click', function () {
+      .on('click', function () {        
         if (d3.event.defaultPrevented) {
           return; // panning, not clicking
         }
         node = d3.select(this);
         var transform = getTransform(node, 32);
-
         svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(transform.translate[0], transform.translate[1]).scale(transform.scale))
         scale = transform.scale;
+        $('div#list-buildings > a').removeClass('active');
+        $('div#list-buildings a:nth-child(' + i + ')').addClass('active');        
       });
 
   });
@@ -136,20 +137,31 @@ $(document).ready(function () {
       console.log(err);
     }
   });
-
+  //floor buildings
+  let str_buildings = '';
+  for (i = 0; i < level_info.length; i++) {
+    str_buildings += `<a class="list-group-item list-group-item-action" id="list-` + level_info[i].layer_name + `" data-toggle="list" role="tab">` + level_info[i].display_name + `</a>`;
+  }
+  $('#list-buildings').html(str_buildings);
+  $('div#list-buildings a.list-group-item').on("click", function (e) {
+    let building = level_info.filter(li => li.display_name == $(event.target).text())[0];
+    let node = d3.select("g#" + building.layer_name);
+    var transform = getTransform(node, 32);
+    svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(transform.translate[0], transform.translate[1]).scale(transform.scale))
+    scale = transform.scale;
+  });
   //floor spinner
-
-  $('.dropdown-menu a.dropdown-item').on("click", function (e) {    
+  $('.dropdown-menu a.dropdown-item').on("click", function (e) {
     $('.dropdown-menu > a').removeClass('active');
-    $(event.target).addClass('active');    
+    $(event.target).addClass('active');
     $('#btnDropDown').html($(event.target).text());
 
-    for(i = 0; i < level_names.length; i++){
-      if(level_names[i] == $(event.target).text()){
+    for (i = 0; i < level_names.length; i++) {
+      if (level_names[i] == $(event.target).text()) {
         cur_level = i + 1;
         break;
       }
-    }    
+    }
   });
 
   $('#up-floor').on('click', function () {
@@ -170,23 +182,4 @@ $(document).ready(function () {
       $('#btnDropDown').html(cur_text);
     }
   })
-
-  var data = $.map(level_info, function (obj) {
-    obj.id = obj.layer_name; // replace id with your identifier
-    obj.text = obj.text || obj.display_name;
-    return obj;
-  });
-  $('.building-selector').select2({
-    theme: "classic",
-    placeholder: "Select destination",
-    allowClear: true,
-    data: data
-  });
-  $('.building-selector').on('select2:select', function (e) {
-    var data = e.params.data;
-    node = d3.select("g#" + data.id);
-    var transform = getTransform(node, 32);
-    svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(transform.translate[0], transform.translate[1]).scale(transform.scale))
-    scale = transform.scale;
-  });
 });
