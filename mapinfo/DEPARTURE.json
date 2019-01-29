@@ -1,0 +1,62 @@
+[
+    {
+        "layer_name": "Layer_4_AIRSIDE",
+        "display_name": "AIRSIDE",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_4_LANDSIDE",
+        "display_name": "LANDSIDE",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_4_SECURITY_CHECK",
+        "display_name": "SECURITY CHECK",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_4_EMIGRATION",
+        "display_name": "EMIGRATION",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_4_BOARDING_PASS_CHECK",
+        "display_name": "BOARDING PASS CHECK",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_4_D_C",
+        "display_name": "D/C",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_4_B_A",
+        "display_name": "B/A",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_4_F_E",
+        "display_name": "F/E",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_4_H_G",
+        "display_name": "H/G",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_4_CHECK_IN_HALL",
+        "display_name": "CHECK IN HALL",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_4_OTHER_AIRLINES",
+        "display_name": "OTHER AIRLINES",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_4_OMAN_AIR",
+        "display_name": "OMAN AIR",
+        "image": ""
+    }
+]

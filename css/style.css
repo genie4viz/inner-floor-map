@@ -12,6 +12,7 @@ html, body {
 .container-fluid {
   width: 100%;
   height: 100%;
+  background-color: #058998;
 }
 .map-container {
   width: 100%;

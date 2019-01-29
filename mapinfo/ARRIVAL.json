@@ -1,0 +1,73 @@
+[
+    {
+        "layer_name": "Layer_7",
+        "display_name": "LONG TERM TRANSFER LOUNGE",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_346",
+        "display_name": "C1 & C3",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_359",
+        "display_name": "C2 & C4",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_357",
+        "display_name": "QUEUING AREA",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_354",
+        "display_name": "BOARDING PASS CHECK",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_355",
+        "display_name": "TRANSFER DESKS",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_347",
+        "display_name": "IMMIGRATION",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_356",
+        "display_name": "VIP",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_353",
+        "display_name": "DOMESTIC RECLAIM HALL",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_352",
+        "display_name": "INTERNATIONAL RECLAIM HALL",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_351",
+        "display_name": "DOMESTIC ARRIVAL HALL",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_348",
+        "display_name": "INTERNATIONAL ARRIVAL HALL",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_350",
+        "display_name": "AIR SIDE",
+        "image": ""
+    },
+    {
+        "layer_name": "Layer_349",
+        "display_name": "LAND SIDE",
+        "image": ""
+    }
+    
+]
