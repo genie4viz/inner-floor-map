@@ -49,6 +49,18 @@ html, body {
   top: 100%;
   left: 0;
 }
+.button-view-detail {
+  text-align: center;
+  border: solid 1px #333;      
+  cursor: pointer;
+  background-color: white;  
+  border-radius: 5px;     
+  padding: 4px 2px 4px 2px;      
+  box-shadow: 2px 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);        
+}
+.button-view-detail:hover {
+  background-color: #ddd;
+}
 /*zoom buttons*/
 .zoom-home {
   position: fixed;

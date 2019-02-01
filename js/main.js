@@ -3,7 +3,7 @@ var maxZoom, minZoom;
 var svg;
 w = 1505;
 h = 1498;
-
+let tiplocked = false;
 var scale = 1.0;
 
 let cur_level = 1;
@@ -86,7 +86,7 @@ $(document).ready(function () {
       $('.dropdown-menu a:nth-child(' + cur_level + ')').addClass('active');
       let cur_text = $('.dropdown-menu a:nth-child(' + cur_level + ')').text();
       $('#btnDropDown').html(cur_text);
-      cur_floor_name = level_names[cur_level - 1];      
+      cur_floor_name = level_names[cur_level - 1];
       load_floor_info();
     }
   })
@@ -97,7 +97,7 @@ $(document).ready(function () {
       $(".dropdown-menu a:nth-child(" + cur_level + ")").addClass("active");
       let cur_text = $('.dropdown-menu a:nth-child(' + cur_level + ')').text();
       $('#btnDropDown').html(cur_text);
-      cur_floor_name = level_names[cur_level - 1];      
+      cur_floor_name = level_names[cur_level - 1];
       load_floor_info();
     }
   })
@@ -133,7 +133,7 @@ function load_floor_info() {
     error: function (err) {
       console.log(err);
     }
-  });  
+  });
   //floor buildings
   let str_buildings = '';
   for (i = 0; i < level_info.length; i++) {
@@ -143,7 +143,7 @@ function load_floor_info() {
   $('div#list-buildings a.list-group-item').on("click", function (e) {
     let building = level_info.filter(li => li.display_name == $(event.target).text())[0];
     let node = d3.select("g#" + building.layer_name);
-    var transform = getTransform(node, 32);
+    var transform = getTransform(node, 10);
     svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity.translate(transform.translate[0], transform.translate[1]).scale(transform.scale))
     scale = transform.scale;
   });
@@ -151,7 +151,15 @@ function load_floor_info() {
   var tool_tip = d3.tip()
     .attr("class", "d3-tip")
     .offset([-8, 0])
-    .html(d => d);
+    .html(function (d) {
+      // console.log(d.image);
+      strInner = `<img src='` + d.image + `'>` 
+        + `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;` + d.display_name + `<br>` + `<br>`
+        + `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;` + d.description + `<br><br>`
+        + `<div class='button-view-detail'><a href='` + d.node_url + `'>&nbsp;View&nbsp;Details&nbsp;</a></div>`;
+      return strInner;
+
+    });
 
   d3.xml("mapinfo/" + cur_floor_name + ".svg").mimeType("image/svg+xml").get(function (error, xml) {
     if (error) throw error;
@@ -194,14 +202,18 @@ function load_floor_info() {
           d3.select(this)
             .style('cursor', 'pointer')
             .style('fill-opacity', 0.5);
-          tool_tip.show(building.display_name);
+          tool_tip.show(building);
         })
-        .on('mouseout', function () {
+        .on('mouseout', function () {          
           d3.select(this)
             .style('fill-opacity', 1);
-          tool_tip.hide();
+          if(tiplocked != true)
+            tool_tip.hide();
         })
         .on('click', function () {
+          tool_tip.hide();
+          tiplocked = true;
+          tool_tip.show(building);
           if (d3.event.defaultPrevented) {
             return; // panning, not clicking
           }

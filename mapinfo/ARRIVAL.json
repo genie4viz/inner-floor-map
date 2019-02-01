@@ -2,72 +2,85 @@
     {
         "layer_name": "Layer_7",
         "display_name": "LONG TERM TRANSFER LOUNGE",
-        "image": ""
+        "image": "mapinfo/image/image1.png",
+        "description": "Here is longterm transfer lounge"
     },
     {
         "layer_name": "Layer_346",
         "display_name": "C1 & C3",
-        "image": ""
+        "image": "mapinfo/image/image1.png",
+        "description": "Here is C1 & C3"
     },
     {
         "layer_name": "Layer_359",
         "display_name": "C2 & C4",
-        "image": ""
+        "image": "mapinfo/image/image1.png",
+        "description": "Here is C2 & C4"
     },
     {
         "layer_name": "Layer_357",
         "display_name": "QUEUING AREA",
-        "image": ""
+        "image": "mapinfo/image/image1.png",
+        "description": "Here is QUEUING AREA"
     },
     {
         "layer_name": "Layer_354",
         "display_name": "BOARDING PASS CHECK",
-        "image": ""
+        "image": "mapinfo/image/image1.png",
+        "description": "Here is BOARDING PASS CHECK"
     },
     {
         "layer_name": "Layer_355",
         "display_name": "TRANSFER DESKS",
-        "image": ""
+        "image": "mapinfo/image/image1.png",
+        "description": "Here is TRANSFER DESKS"
     },
     {
         "layer_name": "Layer_347",
         "display_name": "IMMIGRATION",
-        "image": ""
+        "image": "mapinfo/image/image2.png",
+        "description": "Here is IMMIGRATION"
     },
     {
         "layer_name": "Layer_356",
         "display_name": "VIP",
-        "image": ""
+        "image": "mapinfo/image/image2.png",
+        "description": "Here is VIP"
     },
     {
         "layer_name": "Layer_353",
         "display_name": "DOMESTIC RECLAIM HALL",
-        "image": ""
+        "image": "mapinfo/image/image2.png",
+        "description": "Here is DOMESTIC RECLAIM HALL"
     },
     {
         "layer_name": "Layer_352",
         "display_name": "INTERNATIONAL RECLAIM HALL",
-        "image": ""
+        "image": "mapinfo/image/image2.png",
+        "description": "Here is INTERNATIONAL RECLAIM HALL"
     },
     {
         "layer_name": "Layer_351",
         "display_name": "DOMESTIC ARRIVAL HALL",
-        "image": ""
+        "image": "mapinfo/image/image2.png",
+        "description": "Here is DOMESTIC ARRIVAL HALL"
     },
     {
         "layer_name": "Layer_348",
         "display_name": "INTERNATIONAL ARRIVAL HALL",
-        "image": ""
+        "image": "mapinfo/image/image2.png",
+        "description": "Here is INTERNATIONAL ARRIVAL HALL"
     },
     {
         "layer_name": "Layer_350",
         "display_name": "AIR SIDE",
-        "image": ""
+        "image": "mapinfo/image/image2.png",
+        "description": "Here is AIR SIDE"
     },
     {
         "layer_name": "Layer_349",
         "display_name": "LAND SIDE",
-        "image": ""
+        "image": "mapinfo/image/image2.png",
+        "description": "Here is LAND SIDE"
     }
-    
 ]
